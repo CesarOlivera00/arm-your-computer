@@ -21,6 +21,7 @@ function Load(){
     document.getElementById("btn_select_intel").addEventListener('click', function () { SelectMarcaMP("INTEL"); });
     document.getElementById("btn_select_amd").addEventListener('click', function () { SelectMarcaMP("AMD"); });
     document.getElementById("btn_continuar_seleccion").addEventListener('click', ContinuarSeleccion);
+    document.getElementById("btn_reset_computer").addEventListener('click', ResetMyComputer);
 
     arrayMicroprocessor.push(new Microprocessor("AMD", "Ryzen 5", 37999, "./images/microprocessor/mc_amd_0001.jpg", 4.5));
     arrayMicroprocessor.push(new Microprocessor("AMD", "Ryzen 7", 54999, "./images/microprocessor/mc_amd_0002.jpg", 5.0));
@@ -61,11 +62,11 @@ function Load(){
     arrayComputerScreen.push(new ComputerScreen("IC3", "2200DFE IPS HDMI", 28999, "./images/computerscreen/cs_0002.png", 22, 60));
     arrayComputerScreen.push(new ComputerScreen("ViewSonic", "VX3268-2KPC-MHD", 86999, "./images/computerscreen/cs_0003.jpg", 32, 144));
 
-    if (sessionStorage.getItem("paso") != null) {
-        PASO = parseInt(sessionStorage.getItem("paso"));
-        marca_mp = sessionStorage.getItem("marca_mp").toString();
+    if (localStorage.getItem("paso") != null) {
+        PASO = parseInt(localStorage.getItem("paso"));
+        marca_mp = localStorage.getItem("marca_mp").toString();
 
-        objComputerAux = JSON.parse(sessionStorage.getItem("myComputer"));
+        objComputerAux = JSON.parse(localStorage.getItem("myComputer"));
         myComputer.microprocessor = objComputerAux.microprocessor;
         myComputer.motherboard = objComputerAux.motherboard;
         myComputer.videoCard = objComputerAux.videoCard;
@@ -90,9 +91,9 @@ function SelectMarcaMP(marca) {
 }
 
 function SelectComponent() {
-    sessionStorage.setItem("paso", PASO);
-    sessionStorage.setItem("marca_mp", marca_mp);
-    sessionStorage.setItem("myComputer", JSON.stringify(myComputer));
+    localStorage.setItem("paso", PASO);
+    localStorage.setItem("marca_mp", marca_mp);
+    localStorage.setItem("myComputer", JSON.stringify(myComputer));
 
     document.getElementById("content_components").innerHTML = "";
 
@@ -125,6 +126,17 @@ function ViewResumen() {
     console.log(myComputer);
 
     document.getElementById("lbl_precio_total").innerText = "Precio Total $" + myComputer.precioTotal.toString();
+}
+
+function ResetMyComputer() {
+    myComputer = new Computer();
+    PASO = 1;
+
+    localStorage.clear();
+
+    document.getElementById("content_logos_mp").classList.remove("hidden");
+    document.getElementById("wrapper_components").classList.add("hidden");
+    document.getElementById("content_resumen").classList.add("hidden");
 }
 
 function SelectMicroprocessor() {

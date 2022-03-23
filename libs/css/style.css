@@ -173,18 +173,18 @@ body {
     }
 
 /* Resumen */
-#content_resumen {
-    height: 100%;
+.info-resumen {
+    height: calc(100% - 50px);
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-#content_resumen > label {
-    font-size: 40px;
-    color: green;
-}
+    .info-resumen > label {
+        font-size: 40px;
+        color: green;
+    }
 
 /* Util */
 .hidden {
