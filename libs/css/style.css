@@ -186,6 +186,15 @@ body {
         color: green;
     }
 
+/* Modal Resumen */
+.detail-computer .row {
+    margin-bottom: 15px;
+}
+
+.detail-computer label.title-component {
+    font-weight: 600;
+}
+
 /* Util */
 .hidden {
     display: none !important;

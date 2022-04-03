@@ -120,12 +120,37 @@ function ContinuarSeleccion() {
 }
 
 function ViewResumen() {
+    document.getElementById("lbl_detail_microprocessor").innerText = GetNameComponent(myComputer.microprocessor);
+    document.getElementById("lbl_detail_cooler").innerText = GetNameComponent(myComputer.cooler);
+    document.getElementById("lbl_detail_motherboard").innerText = GetNameComponent(myComputer.motherboard);
+    document.getElementById("lbl_detail_storagedisk").innerText = GetNameArrayComponent(myComputer.arrayStorageDisk);
+    document.getElementById("lbl_detail_ram").innerText = GetNameArrayComponent(myComputer.arrayRam);
+    document.getElementById("lbl_detail_videocard").innerText = GetNameComponent(myComputer.videoCard);
+    document.getElementById("lbl_detail_powersupply").innerText = GetNameComponent(myComputer.powerSupplay);
+    document.getElementById("lbl_detail_computercase").innerText = GetNameComponent(myComputer.computerCase);
+    document.getElementById("lbl_detail_computerscreen").innerText = GetNameComponent(myComputer.computerScreen);
+
     document.getElementById("wrapper_components").classList.add("hidden");
     document.getElementById("content_resumen").classList.remove("hidden");
 
     console.log(myComputer);
 
     document.getElementById("lbl_precio_total").innerText = "Precio Total $" + myComputer.precioTotal.toString();
+}
+
+function GetNameComponent(objComponet) {
+    return objComponet != null ? objComponet.marca + " " + objComponet.modelo : "";
+}
+
+function GetNameArrayComponent(arrayComponet) {
+    if (arrayComponet == null) return "";
+
+    let components = "";
+    arrayComponet.forEach(item => {
+        components += GetNameComponent(item) + ", ";
+    });
+
+    return components;
 }
 
 function ResetMyComputer() {
@@ -258,6 +283,8 @@ function CreateBoxComponent(nameComponent, description, objComponet, multiple = 
                 } else {
                     document.getElementById("btn_continuar_seleccion").removeAttribute("disabled");
                 }
+
+                ShowToast("Componente agregado!", 2000);
             }
         );
     } else {
@@ -268,6 +295,8 @@ function CreateBoxComponent(nameComponent, description, objComponet, multiple = 
                 precioTotal += objComponet.precio;
                 PASO++;
                 SelectComponent();
+
+                ShowToast("Componente agregado!", 2000);
             }
         );
     }
@@ -301,4 +330,16 @@ function CreateBoxComponent(nameComponent, description, objComponet, multiple = 
     box_component.appendChild(content_precio);
 
     return box_component;
+}
+
+function ShowToast(message, timeDuration = null) {
+    Toastify({
+        text: message,
+        duration: timeDuration != null ? timeDuration : 3000,
+        className: "info",
+        style: {
+            background: "white",
+            color: "black"
+        }
+    }).showToast();
 }
