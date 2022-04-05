@@ -79,6 +79,7 @@ body {
 
 /* Contenido de componentes */
 .wrapper-components {
+    position: relative;
     display: block;
 }
 
@@ -198,4 +199,11 @@ body {
 /* Util */
 .hidden {
     display: none !important;
+}
+
+.icon-loading {
+    width: 70px;
+    margin: -20px;
+    margin-right: 0px;
+    margin-left: -10px;
 }

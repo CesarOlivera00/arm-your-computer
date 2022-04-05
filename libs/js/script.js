@@ -18,6 +18,12 @@ var PASO = 1;
 var precioTotal = 0;
 
 function Load(){
+    $('#modal_loading').modal({
+        keyboard: false,
+        backdrop: "static",
+        show: false
+    });
+
     document.getElementById("btn_select_intel").addEventListener('click', function () { SelectMarcaMP("INTEL"); });
     document.getElementById("btn_select_amd").addEventListener('click', function () { SelectMarcaMP("AMD"); });
     document.getElementById("btn_continuar_seleccion").addEventListener('click', ContinuarSeleccion);
@@ -116,7 +122,7 @@ function SelectComponent() {
 
 function ContinuarSeleccion() {
     PASO++;
-    SelectComponent();
+    SelectComponentWithdLoading();
 }
 
 function ViewResumen() {
@@ -279,12 +285,11 @@ function CreateBoxComponent(nameComponent, description, objComponet, multiple = 
                 if (myComputer[nameComponent].length == limit) {
                     precioTotal += objComponet.precio;
                     PASO++;
-                    SelectComponent();
+
+                    SelectComponentWithdLoading();
                 } else {
                     document.getElementById("btn_continuar_seleccion").removeAttribute("disabled");
                 }
-
-                ShowToast("Componente agregado!", 2000);
             }
         );
     } else {
@@ -294,9 +299,8 @@ function CreateBoxComponent(nameComponent, description, objComponet, multiple = 
                 myComputer[nameComponent] = objComponet;
                 precioTotal += objComponet.precio;
                 PASO++;
-                SelectComponent();
 
-                ShowToast("Componente agregado!", 2000);
+                SelectComponentWithdLoading();
             }
         );
     }
@@ -332,7 +336,7 @@ function CreateBoxComponent(nameComponent, description, objComponet, multiple = 
     return box_component;
 }
 
-function ShowToast(message, timeDuration = null) {
+const ShowToast = (message, timeDuration = null) => {
     Toastify({
         text: message,
         duration: timeDuration != null ? timeDuration : 3000,
@@ -342,4 +346,14 @@ function ShowToast(message, timeDuration = null) {
             color: "black"
         }
     }).showToast();
+}
+
+const SelectComponentWithdLoading = () => {
+    $("#modal_loading").modal("show");
+
+    setTimeout(() => { 
+        SelectComponent();
+        $("#modal_loading").modal("hide");
+        ShowToast("Componente agregado!", 2000);
+    }, 1500);
 }

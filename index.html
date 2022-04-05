@@ -63,96 +63,108 @@
                 <label id="lbl_precio_total"></label>
             </div>
             <div class="action-buttons">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Ver detalles</button>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_detail_computer">Ver detalles</button>
                 <button type="button" id="btn_reset_computer" class="btn btn-danger">Reiniciar</button>
             </div>
         </div>
     </section>
 
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="modal_detail_computer" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Resumen Detallado</h5>
+                <div class="modal-header">
+                    <h5 class="modal-title">Resumen Detallado</h5>
+                </div>
+                <div class="modal-body detail-computer">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <label class="title-component">Microprocesador:</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <label id="lbl_detail_microprocessor"></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <label class="title-component">Cooler:</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <label id="lbl_detail_cooler"></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <label class="title-component">Placa Madre:</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <label id="lbl_detail_motherboard"></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <label class="title-component">Almacenamiento:</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <label id="lbl_detail_storagedisk"></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <label class="title-component">Memoria RAM:</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <label id="lbl_detail_ram"></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <label class="title-component">Placa de Video:</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <label id="lbl_detail_videocard"></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <label class="title-component">Fuente:</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <label id="lbl_detail_powersupply"></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <label class="title-component">Gabinete:</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <label id="lbl_detail_computercase"></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <label class="title-component">Monitor:</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <label id="lbl_detail_computerscreen"></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+                </div>
             </div>
-            <div class="modal-body detail-computer">
-                <div class="row">
-                    <div class="col-sm-4">
-                        <label class="title-component">Microprocesador:</label>
-                    </div>
-                    <div class="col-sm-8">
-                        <label id="lbl_detail_microprocessor"></label>
-                    </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="modal_loading" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body detail-computer">
+                    <img id="loading_component" src="./images/icon-loading.gif" class="icon-loading" />
+                    <label>Cargando componente...</label>
                 </div>
-                <div class="row">
-                    <div class="col-sm-4">
-                        <label class="title-component">Cooler:</label>
-                    </div>
-                    <div class="col-sm-8">
-                        <label id="lbl_detail_cooler"></label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-4">
-                        <label class="title-component">Placa Madre:</label>
-                    </div>
-                    <div class="col-sm-8">
-                        <label id="lbl_detail_motherboard"></label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-4">
-                        <label class="title-component">Almacenamiento:</label>
-                    </div>
-                    <div class="col-sm-8">
-                        <label id="lbl_detail_storagedisk"></label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-4">
-                        <label class="title-component">Memoria RAM:</label>
-                    </div>
-                    <div class="col-sm-8">
-                        <label id="lbl_detail_ram"></label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-4">
-                        <label class="title-component">Placa de Video:</label>
-                    </div>
-                    <div class="col-sm-8">
-                        <label id="lbl_detail_videocard"></label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-4">
-                        <label class="title-component">Fuente:</label>
-                    </div>
-                    <div class="col-sm-8">
-                        <label id="lbl_detail_powersupply"></label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-4">
-                        <label class="title-component">Gabinete:</label>
-                    </div>
-                    <div class="col-sm-8">
-                        <label id="lbl_detail_computercase"></label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-4">
-                        <label class="title-component">Monitor:</label>
-                    </div>
-                    <div class="col-sm-8">
-                        <label id="lbl_detail_computerscreen"></label>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
-            </div>
             </div>
         </div>
     </div>
