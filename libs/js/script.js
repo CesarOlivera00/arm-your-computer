@@ -24,10 +24,18 @@ function Load(){
         show: false
     });
 
+    $('#modal_recommended_computer').modal({
+        show: false
+    });
+
+    LoadRecommendedComputer("microprocessor", "motherboard", "videoCard", "arrayStorageDisk", "cooler", "arrayRam", "powerSupplay", "computerCase", "computerScreen");
+
     document.getElementById("btn_select_intel").addEventListener('click', function () { SelectMarcaMP("INTEL"); });
     document.getElementById("btn_select_amd").addEventListener('click', function () { SelectMarcaMP("AMD"); });
     document.getElementById("btn_continuar_seleccion").addEventListener('click', ContinuarSeleccion);
     document.getElementById("btn_reset_computer").addEventListener('click', ResetMyComputer);
+    document.getElementById("btn_reset_computer").addEventListener('click', ResetMyComputer);
+    document.getElementById("btn_ver_recomendacion").addEventListener('click', function () { $('#modal_recommended_computer').modal("show"); });
 
     arrayMicroprocessor.push(new Microprocessor("AMD", "Ryzen 5", 37999, "./images/microprocessor/mc_amd_0001.jpg", 4.5));
     arrayMicroprocessor.push(new Microprocessor("AMD", "Ryzen 7", 54999, "./images/microprocessor/mc_amd_0002.jpg", 5.0));
@@ -85,6 +93,33 @@ function Load(){
 
         SelectMarcaMP(marca_mp);
     }
+}
+
+function LoadRecommendedComputer(...arrayStringComponents) {
+    fetch("/recommendedComputer.json")
+    .then((response) => response.json())
+    .then((dataComputer) => {
+        let content = document.getElementById("content_recommended_computer");
+        let descripcion;
+        let box_component;
+
+        arrayStringComponents.forEach(stringComponent => {
+            if (Array.isArray(dataComputer[stringComponent]) == false) {
+                descripcion = dataComputer[stringComponent].marca + " " + dataComputer[stringComponent].modelo;
+                box_component = CreateBoxComponent(stringComponent, descripcion, dataComputer[stringComponent], false, 1, false);
+                content.appendChild(box_component);
+            }
+            else {
+                dataComputer[stringComponent].forEach(itemComponent => {
+                    descripcion = itemComponent.marca + " " + itemComponent.modelo;
+                    box_component = CreateBoxComponent(stringComponent, descripcion, itemComponent, false, 1, false);
+                    content.appendChild(box_component);
+                });
+            }
+        });
+
+        
+    });
 }
 
 function SelectMarcaMP(marca) {
@@ -262,47 +297,49 @@ function SelectComputerScreen() {
     });
 }
 
-function CreateBoxComponent(nameComponent, description, objComponet, multiple = false, limit = 1){
+function CreateBoxComponent(nameComponent, description, objComponet, multiple = false, limit = 1, withFunction = true){
     let box_component = document.createElement("a");
     box_component.classList.add("box-component");
 
-    let lbl_cantidad_components = document.createElement("label");
-    lbl_cantidad_components.classList.add("cantidad-components");
-    lbl_cantidad_components.innerText = "0";
+    if (withFunction) {
+        let lbl_cantidad_components = document.createElement("label");
+        lbl_cantidad_components.classList.add("cantidad-components");
+        lbl_cantidad_components.innerText = "0";
+    
+        box_component.appendChild(lbl_cantidad_components);
 
-    box_component.appendChild(lbl_cantidad_components);
-
-    if (multiple) {
-        box_component.addEventListener("click",
-            function () {
-                if (myComputer[nameComponent] == null) {
-                    myComputer[nameComponent] = [];
+        if (multiple) {
+            box_component.addEventListener("click",
+                function () {
+                    if (myComputer[nameComponent] == null) {
+                        myComputer[nameComponent] = [];
+                    }
+    
+                    myComputer[nameComponent].push(objComponet);
+                    lbl_cantidad_components.innerText = myComputer[nameComponent].length.toString();
+                    
+                    if (myComputer[nameComponent].length == limit) {
+                        precioTotal += objComponet.precio;
+                        PASO++;
+    
+                        SelectComponentWithdLoading();
+                    } else {
+                        document.getElementById("btn_continuar_seleccion").removeAttribute("disabled");
+                    }
                 }
-
-                myComputer[nameComponent].push(objComponet);
-                lbl_cantidad_components.innerText = myComputer[nameComponent].length.toString();
-                
-                if (myComputer[nameComponent].length == limit) {
+            );
+        } else {
+            lbl_cantidad_components.classList.add("hidden");
+            box_component.addEventListener("click",
+                function () {
+                    myComputer[nameComponent] = objComponet;
                     precioTotal += objComponet.precio;
                     PASO++;
-
+    
                     SelectComponentWithdLoading();
-                } else {
-                    document.getElementById("btn_continuar_seleccion").removeAttribute("disabled");
                 }
-            }
-        );
-    } else {
-        lbl_cantidad_components.classList.add("hidden");
-        box_component.addEventListener("click",
-            function () {
-                myComputer[nameComponent] = objComponet;
-                precioTotal += objComponet.precio;
-                PASO++;
-
-                SelectComponentWithdLoading();
-            }
-        );
+            );
+        }
     }
 
     let content_imagen = document.createElement("div");

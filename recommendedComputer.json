@@ -1,0 +1,74 @@
+{
+    "microprocessor": {
+        "marca":"INTEL",
+        "modelo":"i5",
+        "precio":27999,
+        "urlImagen":"./images/microprocessor/mc_intel_0002.jpg",
+        "velocidad":5
+    },
+    "motherboard": {
+        "marca":"Asrock",
+        "modelo":"A520M-HVS AM4",
+        "precio":10999,
+        "urlImagen":"./images/motherboard/mb_0002.jpg"
+    },
+    "videoCard": {
+        "marca":"NVIDIA",
+        "modelo":"GeForce RTX 2060",
+        "precio":139999,
+        "urlImagen":"./images/videocard/vc_0002.png",
+        "velocidad":8
+    },
+    "arrayStorageDisk": [
+        {
+            "marca":"Gigabyte",
+            "modelo":"SSD 480GB",
+            "precio":10699,
+            "urlImagen":"./images/storage/st_0002.jpg",
+            "capacidad":1024
+        }
+    ],
+    "cooler": {
+        "marca":"Master",
+        "modelo":"ML120L V2 RGB",
+        "precio":13999,
+        "urlImagen":"./images/cooler/cooler_0003.jpg",
+        "liquido":true
+    },
+    "arrayRam": [
+        {
+            "marca":"Kingston",
+            "modelo":"Fury Beast 8GB",
+            "precio":8199,
+            "urlImagen":"./images/ram/ram_0002.jpg"
+        },
+        {
+            "marca":"Kingston",
+            "modelo":"Fury Beast 8GB",
+            "precio":8199,
+            "urlImagen":"./images/ram/ram_0002.jpg"
+        }
+    ],
+    "powerSupplay": {
+        "marca":"Aerocool",
+        "modelo":"Cylon 80 Plus Bronce",
+        "precio":6299,
+        "urlImagen":"./images/powersupply/ps_0002.jpg",
+        "potencia":500
+    },
+    "computerCase": {
+        "marca":"MasterBox",
+        "modelo":"K501L",
+        "precio":7299,
+        "urlImagen":"./images/computercase/cc_0002.jpg",
+        "rgb":true
+    },
+    "computerScreen": {
+        "marca":"IC3",
+        "modelo":"2200DFE IPS HDMI",
+        "precio":28999,
+        "urlImagen":"./images/computerscreen/cs_0002.png",
+        "pulgadas":22,
+        "fps":60
+    }
+}
