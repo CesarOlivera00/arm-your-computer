@@ -119,7 +119,7 @@ function LoadRecommendedComputer(...arrayStringComponents) {
         });
     })
     .catch(error => {
-        console.log(error);
+        ShowToast("Ocurrió un error inesperado al obtener datos de una computadora recomendada!");
     });
 }
 
