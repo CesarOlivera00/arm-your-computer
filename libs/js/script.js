@@ -117,8 +117,9 @@ function LoadRecommendedComputer(...arrayStringComponents) {
                 });
             }
         });
-
-        
+    })
+    .catch(error => {
+        console.log(error);
     });
 }
 
